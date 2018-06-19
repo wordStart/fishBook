@@ -1,5 +1,5 @@
-from helper import is_isbn_or_key
-from yushu_book import YuShuBook
+from app.libs.helper import is_isbn_or_key
+from app.spider.yushu_book import YuShuBook
 from flask import jsonify, request
 from app.forms.book import SearchForm
 from . import web
@@ -13,7 +13,7 @@ def search():
     if isbn_or_key == 'isbn':
       result = YuShuBook.search_by_isbn(q)
     else:
-      result = YuShuBook.search_by_keyword(q)
+      result = YuShuBook.search_by_keyword(q, page)
     return jsonify(result)
   else:
     return jsonify({'msg': '参数校验失败'})
